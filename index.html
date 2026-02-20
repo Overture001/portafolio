@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="title" content="Manuel Tovar Gamiño | Portafolio Profesional">
+<meta name="description" content="Especialista en identidad visual, branding y diseño editorial. Explora mis proyectos de branding y diseño multimedia.">
+<meta name="author" content="Manuel Tovar Gamiño" />
+<link rel="canonical" href="https://manueltovar.netlify.app/" />
+<title>Portafolio</title>
+<style>
+
+/* ====== Tipografías (reemplaza por tus archivos reales) ====== */
+@font-face {
+  font-family: "WO3";
+  src: url("fonts/WO3.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("fonts/Gotham-Medium.woff2") format("woff2");
+}
+
+  :root{
+    --text-light: #e6eef8;
+    --overlay-dark: rgba(0,0,0,0.45);
+  }
+
+html {
+    background-color: #050505; /* El color de seguridad siempre presente */
+  }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Gotham", system-ui;
+    color: var(--text-light);
+    background: transparent; /* Permite ver el Canvas y el color de html */
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    -webkit-font-smoothing: antialiased;
+  }
+/* asegura que nada se desborde por márgenes negativos */
+* {
+  box-sizing: border-box;
+}
+
+/* =========================
+   PRELOADER
+========================= */
+
+#preloader{
+  position: fixed;
+  inset: 0;
+  background: #0d0d0d; /* mismo tono base que tu sitio */
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 3rem;
+  z-index: 9999;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#preloader.hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+
+#loaderText {
+  font-family: 'WO3', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: white;
+  opacity: 0.6;
+  filter: blur(0.5px);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+#loaderText {
+  animation: pulseBlur 2s ease-in-out infinite;
+}
+
+@keyframes pulseBlur {
+  0% {
+    opacity: 0.4;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0.4;
+    filter: blur(4px);
+  }
+}
+
+/* =========================
+   CANVA
+========================= */
+
+#bg-canvas{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background-color: #050505;
+}
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+
+.wrap{
+  position:relative;
+  z-index:2;
+}
+
+  /* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:left;
+  scroll-snap-align:start;
+  padding:2rem 2rem;
+}
+
+.hero-inner{
+  max-width:1100px;
+  width:100%;
+  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.03);
+  border-radius:14px;
+  padding:48px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.hero-content{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+}
+
+.hero-text{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  flex:1;
+}
+
+.title{
+  font-family:"WO3";
+  font-size:clamp(40px,6vw,100px);
+  margin:0;
+  line-height:0.9;
+  opacity:0;
+  transform:translateY(12px);
+  animation:fadeInUp 900ms ease 200ms forwards;
+}
+
+.subtitle{
+  font-family:"Gotham";
+  font-size:clamp(14px,1.8vw,20px);
+  margin-top:12px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:fadeInUp 900ms ease 500ms forwards;
+  color:rgba(230,238,248,0.85);
+}
+
+.hero-logo-wrap{
+  flex-shrink:0;
+}
+
+.hero-logo{
+  width:160px; /* ajusta según tu logotipo */
+  height:auto;
+  object-fit:contain;
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeInUp 1s ease 700ms forwards;
+}
+
+@media(max-width:780px){
+  .hero-content {
+    flex-direction: column;
+    /* Mantenemos el bloque alineado al inicio (izquierda) */
+    align-items: flex-start; 
+    gap: 40px;
+  }
+
+  .hero-text {
+    /* Nos aseguramos de que el texto no intente centrarse */
+    text-align: left;
+    width: 100%;
+  }
+
+  .hero-logo-wrap {
+    /* 🔥 Esta es la clave: el contenedor del logo se centra a sí mismo 
+       dentro del padre, sin afectar al bloque de texto */
+    align-self: center; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-logo {
+    margin-top: 0;
+    width: 150px; /* Ajusta el tamaño si lo sientes muy grande en móvil */
+  }
+}
+  @keyframes fadeInUp{to{opacity:1;transform:translateY(0);} }
+
+  /* PROYECTOS */
+  .projects{
+    width:100%;
+    display:block;
+    }
+  .project{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3rem;
+    box-sizing:border-box;
+    scroll-snap-align:start;
+    transition: transform 900ms cubic-bezier(.16,.8,.3,1), opacity 700ms ease;
+    opacity:0;
+    transform:translateX(24px) scale(0.995);
+  }
+  .project.visible{opacity:1;transform:translateX(0) scale(1);}
+  .card{
+    position:relative;width:min(1100px,92%);height:75vh;overflow:hidden;border-radius:16px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.5);cursor:pointer;transition:transform 0.5s ease;
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: transform 0.5s ease, background-image 0.4s ease-in-out;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;background:var(--overlay-dark);
+    transition:background 0.5s ease;
+  }
+  .card-content{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:32px;z-index:2;transition:opacity 0.6s ease;
+  }
+  .title-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px;}
+  .project-logo{width:90px;height:auto;object-fit:contain;opacity:0.9;transition:opacity 0.3s ease;}
+  .project-logo:hover{opacity:1;}
+  @media(max-width:700px){
+    .title-row{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+  .project-logo{margin-top:8px;}}
+  .project-title{font-family:"WO3";font-size:clamp(18px,2.6vw,28px);margin:0;text-align:left;}
+  .project-type{font-size:13px;color:rgba(230,238,248,0.7);margin:6px 0 12px 0;}
+  .project-desc{color:rgba(230,238,248,0.85);font-size:15px;line-height:1.55;margin:0;}
+
+  /* Estado expandido */
+  .card.expanded{
+    position:fixed;inset:0;z-index:1000;border-radius:0;width:100vw;height:100vh;
+    transform:scale(1.02);
+  }
+  .card.expanded::before{background:rgba(0, 0, 0, 0);}
+  .card.expanded .card-content{opacity:0;}
+  .card.expanded::after{
+    content:"✕";position:absolute;top:24px;right:32px;font-size:32px;color:white;z-index:3;
+  }
+  
+  /* ===== Número del proyecto en esquina ===== */
+.project-number{
+  position:absolute;
+  top:16px;
+  right:20px;
+  font-family:"WO3";
+  font-size:clamp(18px, 3vw, 28px);
+  color:rgba(255,255,255,0.15);
+  z-index:3;
+  letter-spacing:1px;
+  user-select:none;
+  pointer-events:none;
+  transition:color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .project-number{
+  color:rgba(255,255,255,0.4);
+  transform:scale(1.05);
+}
+
+/*====TARJETA DE VIDEO====*/
+.card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ⬅️ Esto asegura que llene la tarjeta sin deformarse */
+  z-index: 0;
+  opacity: 0; /* Empezamos invisible */
+  transition: opacity 0.8s ease;
+}
+
+/* Ajuste para que el contenido de la tarjeta esté sobre el video */
+.card-content, .project-number {
+  z-index: 2;
+}
+
+  @media(max-width:880px){.card{height:70vh;}}
+
+/* ===== SECCIÓN FINAL: CONTACTAR ===== */
+.contact{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:start;
+  padding:2rem;
+  position:relative;
+  overflow: hidden;
+}
+
+.contact-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2rem;
+  text-align:center;
+  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.03);
+  border-radius:14px;
+  padding:48px 64px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  animation:fadeInUp 1s ease forwards;
+}
+
+.contact-title{
+  font-family:"WO3";
+  font-size:clamp(28px,2vw,42px);
+  margin:0;
+  color:#e6eef8;
+}
+
+.linkedin-btn{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#0A66C2;
+  font-size:40px;
+  transition:all 0.4s ease;
+  text-decoration:none;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.05);
+}
+
+.linkedin-btn:hover{
+  background:#0A66C2;
+  color:#fff;
+  transform:scale(1.08);
+  box-shadow:0 0 20px rgba(10,102,194,0.5);
+}
+
+.contact-logo{
+  width:120px; /* ajusta según tu logotipo */
+  height:auto;
+  object-fit:contain;
+  opacity:0.9;
+  transition:opacity 0.3s ease;
+}
+
+.contact-logo:hover{
+  opacity:1;
+}
+
+@media(max-width:700px){
+  .contact-inner{
+    padding:36px;
+  }
+  .linkedin-btn{
+    width:68px;height:68px;font-size:34px;
+  }
+  .contact-logo{
+    width:120px;
+  }
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(230, 238, 248, 0.6);
+  padding: 16px 0;
+  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none; /* evita que bloquee clics del área superior */
+}
+
+/* ===== Side Navigation Numbers ===== */
+.side-nav{
+  position:fixed;
+  right:40px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:240px;
+  width:60px;
+  font-family:'WO3', sans-serif;
+  transition:opacity 0.6s ease;
+  opacity:0;
+  pointer-events: none;
+  z-index:100;
+}
+
+.side-nav a{
+  font-size:18px;
+  text-decoration:none;
+  color:white;
+  margin:8px 0;   /* 🔥 importante */
+  transition:transform .4s cubic-bezier(.22,1,.36,1),
+             opacity .4s ease;
+}
+
+.side-nav a:hover{
+  color:rgba(255,255,255,0.6);
+  transform:scale(1.15);
+}
+
+.side-nav a.active{
+  color:rgba(255,255,255,0.95);
+  transform:scale(1.25);
+}
+
+@media(max-width:900px){
+  .side-nav{
+    display:none;
+  }
+}
+
+</style>
+
+<!-- ===== META PARA VISTA PREVIA ===== -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manueltovar.netlify.app/">
+<meta property="og:title" content="Manuel Tovar Gamiño | Portafolio Profesional">
+<meta property="og:description" content="Identidad visual, branding y diseño editorial. Conoce mi portafolio interactivo.">
+<meta property="og:image" content="https://manueltovar.netlify.app/images/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_MX">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://manueltovar.netlify.app/">
+<meta property="twitter:title" content="Manuel Tovar Gamiño | Portafolio Profesional">
+<meta property="twitter:description" content="Especialista en identidad visual, branding y diseño editorial. Portafolio interactivo.">
+<meta property="twitter:image" content="https://manueltovar.netlify.app/images/preview.jpg">
+
+<!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+</head>
+<body>
+<div id="preloader">
+  <div id="loaderText">loading_ 00</div>
+</div>
+<canvas id="bg-canvas"></canvas>
+<div class="noise"></div>
+
+<div class="wrap" id="wrap">
+  <section class="hero" id="hero-inicio">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="title">Portafolio_</h1>
+        <p class="subtitle"><strong>LDG MP </strong>Manuel Tovar Gamiño</p>
+      </div>
+      <div class="hero-logo-wrap">
+        <img class="hero-logo" src="images/Logo-02.png" alt="Logotipo personal" />
+      </div>
+    </div>
+  </div>
+  </section>
+  <section id="projects" class="projects"></section>
+
+  <!-- === PÁGINA FINAL DE CONTACTO === -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-title">Contactar</h2>
+
+      <a href="https://www.linkedin.com/in/manuel-tovar-gami%C3%B1o-8b1092b2/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="linkedin-btn"
+        aria-label="LinkedIn Manuel Tovar">
+        <!-- Ícono de LinkedIn -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.1c.5-.9 1.7-2.1 3.7-2.1 4 0 4.8 2.6 4.8 6v9.5h-4v-8.4c0-2 0-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24h-4V8.5z"/>
+        </svg>
+      </a>
+
+      <img class="contact-logo" src="images/Logo-02.png" alt="Logotipo personal" />
+    </div>
+
+  <!-- === FOOTER === -->
+    <footer class="footer">
+      © 2025 Manuel Tovar Gamiño. Todos los derechos reservados.
+    </footer>
+
+  </section>
+</div>
+
+<nav class="side-nav" id="sideNav"></nav>
+
+<script>
+/* ==== Lista de proyectos con imágenes ==== */
+const projects = [
+  {id:1, type:'Branding Corporativo', title:'SECRIPSA', desc:'Empresa de seguridad privada.', img:'images/logo_secripsa.png'},
+  {id:2, type:'Branding Personal', title:'Psicólogo', desc:'Identidad profesional.', img:'images/logo_psicologo.png'},
+  {id:3, type:' ', title:" ", desc:' ', img:'images/papeleria_psicologo.png'},
+  {id:4, type:'Branding Personal', title:'Abogado', desc:'Identidad profesional.', img:'images/identidad_visual_abogado.png'},
+  {id:5, type:'Branding Corporativo', title:'Asprovid', desc:'Promotoría de Seguros Monterrey.', img:'images/papeleria_promotoria.png'},
+  {id:6, type:'Diseño Editorial', title:'Editorial Artiva', desc:'Editorial de Revista Artiva y Novela "Zorros Urbanos".', img:'images/diseno_editorial.png'},
+  {id:7, type:'Imagotipo', title:'Media Luz', desc:'Cafetería & Pastelería.', img:'images/logotipo_cafeteria.png'},
+  {id:8, type:'Branding Corporativo', title:"Reina Roja", desc:'Chocolatería artesanal.', img:'images/isotipo_chocolateria.png'},
+  {id:9, type:'  ', title:'  ', desc:' ', img:'images/papeleria_chocolateria.png'},
+  {id:10, type:'Branding de evento', title:'Boda', desc:'Identidad visual del evento.', img:'images/monograma_boda.png'},
+  {id:11, type:' ', title:' ', desc:' ', img:'images/invitacion_boda.png'},
+  {id:12, type:'Branding App', title:"Pebel’s", desc:'App de búsqueda en textos.', img:'images/logotipo_app.png'},
+  {id:13, type:'Menú', title:'Mi Barrio Rock', desc:'Hamburguesas & Hot Dogs.', img:'images/diseno_menu.png'},
+  {id:14, type:'Branding Evento', title:"Universidad Iberoamericana León", desc:'Coloquio de Educación Continua 2024.', img:'images/logotipo_coloquio_1.png'},
+  {id:15, type:'Branding Evento', title:'Universidad Iberoamericana León', desc:'Coloquio de Educación Continua 2025.', img:'images/logotipo_coloquio_2.png'},
+  {id:16, type:'Videos', title:'Portafolio multimedia', desc:'Haz clic para ver mi perfil de Vimeo', img:'images/qr_portafolio_multimedia.png', video:'video/portafolio_multimedia.mp4'}
+];
+
+/* === Genera cards === */
+const projectsContainer=document.getElementById('projects');
+projects.forEach((p, i) => {
+  const sec = document.createElement('section');
+  sec.className = 'project'; // Quitamos 'visible', lo pondrá el Observer
+  sec.id = `project-${String(i + 1).padStart(2,'0')}`;
+  
+  const videoHTML = p.video 
+    ? `<video class="card-video" muted loop playsinline poster="${p.img}">
+         <source src="${p.video}" type="video/mp4">
+       </video>` 
+    : '';
+
+  // 🔥 CLAVE: Ponemos el background-image aquí mismo para precargarla
+  sec.innerHTML = `
+    <div class="card" tabindex="0" role="button" aria-label="${p.title}" 
+         style="background-image: url('${p.img}')">
+      ${videoHTML} 
+      <span class="project-number">${String(i + 1).padStart(2, '0')}</span>
+      <div class="card-content">
+        <h2 class="project-title">${p.title}</h2>
+        <div class="project-type">${p.type}</div>
+        <p class="project-desc">${p.desc}</p>
+      </div>
+    </div>`;
+  projectsContainer.appendChild(sec);
+});
+
+/* === Generar navegación lateral SOLO proyectos === */
+const sideNav = document.getElementById('sideNav');
+
+projects.forEach((p, i) => {
+
+  const number = String(i + 1).padStart(2,'0');
+
+  const link = document.createElement('a');
+  link.href = `#project-${number}`;
+  link.textContent = number;
+
+    link.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Usamos la función global que actualiza visualmente los números
+    // Le sumamos 1 porque el índice 0 en tu array de secciones es el Hero
+    if (typeof window.scrollToSection === 'function') {
+      window.scrollToSection(i + 1);
+    } else {
+      // Fallback por si la función no ha cargado
+      document.getElementById(`project-${number}`).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  sideNav.appendChild(link);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const section = entry.target;
+    const video = section.querySelector('.card-video'); 
+
+    if (entry.isIntersecting) {
+      section.classList.add('visible'); // Dispara la animación de CSS
+      if (video) {
+        video.play().catch(() => {}); 
+        video.style.opacity = "1"; 
+      }
+    } else {
+      section.classList.remove('visible'); // Opcional: repetir animación al volver
+      if (video) {
+        video.pause();
+        video.style.opacity = "0"; 
+      }
+    }
+  });
+}, { 
+  threshold: 0.1,
+  rootMargin: '0px 0px 300px 0px'
+});
+
+document.querySelectorAll('.project').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.project').forEach(el => observer.observe(el));
+
+/* Optional: smooth keyboard / wheel navigation — snap to pages */
+(function enableKeyboardSnapping(){
+  let sections = Array.from(document.querySelectorAll('.hero, .project, .contact'));
+  let current = 0;
+  let isScrolling = false;
+
+  // Movemos estas funciones aquí arriba para que estén disponibles siempre
+  window.updateSideNav = function() { 
+     /* ... todo el código que ya tienes de updateSideNav ... */
+  };
+
+  window.updateCurrentSection = function() {
+     /* ... todo el código que ya tienes de updateCurrentSection ... */
+  };
+
+  const isMobile = window.matchMedia("(pointer: coarse)").matches;
+  if (isMobile) {
+    // En móvil solo escuchamos el scroll para actualizar los números
+    window.addEventListener('scroll', window.updateCurrentSection);
+    return; 
+  }
+
+window.scrollToSection = function(idx){
+  if (isScrolling) return;
+  closeExpandedCards();
+  isScrolling = true;
+
+  current = Math.max(0, Math.min(sections.length - 1, idx));
+
+  // 🔥 ACTUALIZAR BARRA INMEDIATAMENTE
+  updateSideNav();
+
+  sections[current].scrollIntoView({ behavior: 'smooth' });
+
+  setTimeout(() => {
+    isScrolling = false;
+  }, 700);
+}
+
+function updateSideNav() {
+  const nav = document.getElementById('sideNav');
+  const links = Array.from(nav.querySelectorAll('a'));
+  const currentSection = sections[current];
+
+  if (!currentSection || !currentSection.classList.contains('project')) {
+    nav.style.opacity = '0';
+    nav.style.pointerEvents = 'none';
+    return;
+  }
+
+  nav.style.opacity = '1';
+  nav.style.pointerEvents = 'auto';
+
+  const activeId = currentSection.id;
+  const activeNumber = parseInt(activeId.split('-')[1], 10) - 1;
+  const total = links.length;
+  const half = Math.floor(total / 2);
+  
+  // 🔥 Definimos el límite de vecinos visibles
+  const neighborLimit = 3; 
+
+  links.forEach((link, i) => {
+    // 1. Orden visual (mantiene el activo al centro del flujo flex)
+    let visualOrder = (i - activeNumber + half) % total;
+    if (visualOrder < 0) visualOrder += total;
+    link.style.order = visualOrder;
+
+    // 2. Distancia circular
+    let diff = Math.abs(i - activeNumber);
+    let distance = Math.min(diff, total - diff);
+
+    // 🔥 LÓGICA NUEVA: Si está muy lejos, lo ocultamos por completo
+    if (distance > neighborLimit) {
+      link.style.opacity = 0;
+      link.style.pointerEvents = 'none'; // Evita clicks en números invisibles
+      link.style.transform = 'scale(0.8)'; // Un pequeño scale ayuda a la transición de salida
+    } else {
+      // Si está dentro del rango, aplicamos la escala y opacidad normal
+      link.style.pointerEvents = 'auto';
+      
+      const scale = 1.3 - (distance * 0.25);
+      // Ajustamos la opacidad para que los límites (el 3ro) no sean tan tenues
+      const opacity = 1 - (distance * 0.3); 
+
+      link.style.transform = `scale(${Math.max(scale, 0.8)})`;
+      link.style.opacity = Math.max(opacity, 0.2);
+    }
+
+    link.classList.toggle('active', i === activeNumber);
+  });
+}
+
+function updateCurrentSection(){
+
+  let closestIndex = 0;
+  let closestDistance = Infinity;
+
+  sections.forEach((section, i)=>{
+    const rect = section.getBoundingClientRect();
+    const distance = Math.abs(rect.top);
+
+    if(distance < closestDistance){
+      closestDistance = distance;
+      closestIndex = i;
+    }
+  });
+
+  if(closestIndex !== current){
+    current = closestIndex;
+    updateSideNav();
+  }
+}
+
+window.addEventListener('scroll', updateCurrentSection);
+
+window.addEventListener('wheel', (e)=>{
+
+  if (isScrolling) {
+    e.preventDefault();
+    return;
+  }
+
+  if (Math.abs(e.deltaY) < 30) return;
+  closeExpandedCards();
+  updateCurrentSection();
+
+  e.preventDefault(); // ⬅ SOLO aquí
+
+  if (e.deltaY > 0) {
+    scrollToSection(current + 1);
+  } else {
+    scrollToSection(current - 1);
+  }
+
+}, { passive: false });
+
+
+  window.addEventListener('keydown',(e)=>{
+    if(e.key === 'ArrowDown' || e.key === 'PageDown'){
+      scrollToSection(current + 1);
+    }
+    if(e.key === 'ArrowUp' || e.key === 'PageUp'){
+      scrollToSection(current - 1);
+    }
+  });
+
+})();
+
+/* === Expandir imagen o abrir enlace en la última card === */
+projectsContainer.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+
+  const cards = document.querySelectorAll('.card');
+  const index = Array.from(cards).indexOf(card);
+
+  if (index === cards.length - 1) {
+    window.open('https://vimeo.com/overture001', '_blank');
+  } else {
+    card.classList.toggle('expanded');
+  }
+});
+
+/* === CERRAR TARJETAS CON EL SCROLL === */
+function closeExpandedCards() {
+  const expandedCard = document.querySelector('.card.expanded');
+  if (expandedCard) {
+    expandedCard.classList.remove('expanded');
+  }
+}
+
+/* === NUEVO PRELOADER GLOBAL (Funciona en móvil y PC) === */
+(function setupPreloader() {
+  const preloader = document.getElementById("preloader");
+  const loaderText = document.getElementById("loaderText");
+  if (!preloader || !loaderText) return;
+
+  let progress = 0;
+  let realLoaded = false;
+  const startTime = Date.now();
+  const minDuration = 800; // Tiempo mínimo de gracia
+
+  // Detectar carga
+  if (document.readyState === "complete") {
+    realLoaded = true;
+  } else {
+    window.addEventListener("load", () => { realLoaded = true; });
+  }
+
+  function animate() {
+    // Si no ha cargado, sube lento. Si ya cargó, sube rápido.
+    progress += realLoaded ? 3 : 0.4; 
+    
+    if (progress > 100) progress = 100;
+
+    const display = Math.floor(progress);
+    loaderText.textContent = "loading_ " + (display < 10 ? "0" + display : display);
+
+    if (progress < 100) {
+      requestAnimationFrame(animate);
+    } else {
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, minDuration - elapsed);
+
+      setTimeout(() => {
+        preloader.classList.add("hidden");
+        setTimeout(() => preloader.remove(), 1000);
+      }, remaining);
+    }
+  }
+  requestAnimationFrame(animate);
+})();
+
+/* === Fondo canvas en escala de grises con cursor iluminado === */
+(function bgCanvas(){
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Usamos una función para actualizar el tamaño de forma limpia
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  let w, h;
+  // Inicializamos
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+
+  let mouse = { x: w/2, y: h/2 };
+
+  // 🔄 Escuchamos el resize pero actualizamos las variables w y h
+  window.addEventListener('resize', () => {
+    resize();
+    w = canvas.width;
+    h = canvas.height;
+  });
+
+  window.addEventListener('pointermove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  const grainCanvas=document.createElement('canvas');
+  const gctx=grainCanvas.getContext('2d');
+  grainCanvas.width=256;grainCanvas.height=256;
+  function makeGrain(){
+    const img=gctx.createImageData(256,256);
+    for(let i=0;i<img.data.length;i+=4){
+      const val=Math.floor(Math.random()*255);
+      img.data[i]=img.data[i+1]=img.data[i+2]=val;
+      img.data[i+3]=30; // densidad más alta
+    }
+    gctx.putImageData(img,0,0);
+  }
+  makeGrain();
+
+function draw(){
+  // Eliminamos el chequeo de needsUpdate para que sea instantáneo
+  const g = ctx.createRadialGradient(
+    mouse.x, mouse.y, Math.min(w,h)*0.1,
+    w/2, h/2, Math.max(w,h)*0.9
+  );
+
+  g.addColorStop(0,'#303030');
+  g.addColorStop(0.35,'#262626');
+  g.addColorStop(0.65,'#050505');
+  g.addColorStop(1,'#151515');
+
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,w,h);
+
+  ctx.globalAlpha = 0.25;
+  for(let x=0;x<w;x+=256){
+    for(let y=0;y<h;y+=256){
+      ctx.drawImage(grainCanvas,x,y);
+    }
+  }
+  ctx.globalAlpha = 1;
+
+  requestAnimationFrame(draw);
+}
+
+// Forzar un frame inmediato
+draw();
+
+// Luego inicializaciones
+updateCurrentSection();
+updateSideNav();
+
+})();
+
+</script>
+</body>
+</html>
